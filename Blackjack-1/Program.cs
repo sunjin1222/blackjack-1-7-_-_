@@ -2,7 +2,7 @@ using System;
 using System.Net.Sockets;
 
 
-Blackjack blackjack = new();//이거 Whilea 문안에넣으면 재시작할때마다 덱을 리셋할거 같아서 일단 밖으로움겨두었습니다 확인 부탁드려요  
+Blackjack blackjack = new();//이거 Whilea 문안에넣으면 재시작할때마다 덱을 리셋할거 같아서 일단 밖으로 빼두었습니다 확인 부탁드려요  
 
 while (true)
 {
@@ -59,13 +59,12 @@ while (true)
     }
 
 
-    if (player.IsOver) //21이 넘으면 바로 게임을 끝나게 만듬
+    if (player.IsOver) //21이 넘으면 바로 게임을 끝나게 만들게 하고싶어서 추가했습니다.
     {
         GameResult();
     }
     else
     {
-
         dealer.IsOpened = true; //딜러 true 만드는방법이 안떠올라서 그냥 입력해버렸습니다. 확인부탁드려요 
         blackjack.secretcard(dealer); // 잘몰라서 그냥 블랙잭 클래스안에서 하나 만들었습니다.
         blackjack.ShowDealer(dealer);
