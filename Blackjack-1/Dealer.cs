@@ -13,13 +13,18 @@ internal class Dealer
 
     public int Counter;
 
-    public bool IsOpened=false;
+    public bool IsOpened = false;
 
 
 
     public Dealer()
     {
-        Hands=new int[21];
+        Hands = new int[21];
+        NewHands();
+    }
+
+    public void Reset()
+    {
         NewHands();
     }
 
@@ -34,7 +39,7 @@ internal class Dealer
         get
         {
             int sum = 0;
-            for (int i=0;i< Counter;i++)
+            for (int i = 0; i < Counter; i++)
             {
                 int card = Hands[i] % 13;
                 switch (card)
@@ -65,10 +70,10 @@ internal class Dealer
             return sum;
         }
     }
-    private void NewHands() 
+    private void NewHands()
     {
         Counter = 0;
-        IsOpened=false;
+        IsOpened = false;
     }
 
     public void AddHands(params int[] cards)
