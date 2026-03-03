@@ -11,17 +11,11 @@ internal class Blackjack
 
     public int Counter;
 
-    public int CurrentCoin; //플레이중 변경되는 코인
-
-    public readonly int MaxCoin=1000; //시작시 가지고있는 코인
-
-    public int InputCoin;//입력받은 코인값 저장
-  
+ 
 
 
     public Blackjack()
     {
-        CurrentCoin = MaxCoin; //코인을 1000으로 초기화
         NewDeck();
     }
       
@@ -121,46 +115,7 @@ internal class Blackjack
     }
 
 
-    public void Betting() //배팅값을 사용자에게 받은후 검사
-    {
-        Console.WriteLine($"보유 칩: {CurrentCoin}");
-
-     
-        while(true)
-            {
-            Console.Write($"베팅 금액을 입력하세요: ");
-            string input = Console.ReadLine();
-            int.TryParse(input, out int inputcoin);
-
-            if (inputcoin > CurrentCoin)
-            {
-                Console.WriteLine();
-                Console.WriteLine($"보유금액을 초과했습니다");
-                Console.WriteLine($"다시 입력해 주세요");
-                Console.WriteLine();
-            }
-            else if (inputcoin < 0)
-            {
-                Console.WriteLine();
-                Console.WriteLine($"0이하의 금액을 배팅할수 없습니다");
-                Console.WriteLine($"다시 입력해 주세요");
-                Console.WriteLine();
-            }
-            else if (inputcoin <= CurrentCoin && inputcoin > 0)
-            {
-                Console.WriteLine();
-                InputCoin = inputcoin;
-                break;
-            }
-            else
-            {
-                Console.WriteLine();
-                Console.WriteLine($"배팅할 금액을 입력해 주세요");
-                Console.WriteLine();
-            }
-
-            }
-    }
+   
 
 
 

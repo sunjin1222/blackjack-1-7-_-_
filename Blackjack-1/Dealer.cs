@@ -23,6 +23,11 @@ internal class Dealer
         NewHands();
     }
 
+    public void Reset()
+    {
+        NewHands();
+    }
+
 
     public int Score
     {

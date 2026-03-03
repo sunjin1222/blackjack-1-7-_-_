@@ -3,16 +3,18 @@ using System.Net.Sockets;
 
 
 Blackjack blackjack = new();//하나의 덱을 생성한고 게임이 끝날때까지 사용하기위해 사용
+Player player = new();
+Dealer dealer = new();
 
 while (true)
 {
     Console.Clear();
     Console.WriteLine("===블랙잭 게임===");
     Console.WriteLine("카드를 섞는 중...");
-    Dealer dealer = new();
-    Player player = new();
+    dealer.Reset();
+    player.Reset();
     Console.WriteLine("===초기패===");
-    blackjack.Betting();
+    player.Betting();
     dealer.AddHands(blackjack.Draw(), blackjack.Draw());
     blackjack.ShowDealer(dealer);
     Console.WriteLine();
@@ -60,7 +62,7 @@ while (true)
     if (player.IsOver) //플레이어 카드가 21을 넘으면 딜러차례없이 게임종료
     {
         GameResult();// 현재코인이 0보다 적으면 그대로 프로그램을 끝나게 만들었는데 모든정보를 리셋하고 코인을 1000 부터 다시 시작하는게 맞는걸까요?
-        if (blackjack.CurrentCoin<=0)
+        if (player.CurrentCoin<=0)
         { 
             return;
         }
@@ -91,7 +93,7 @@ while (true)
             }
         }
         GameResult();
-        if (blackjack.CurrentCoin <= 0)
+        if (player.CurrentCoin <= 0)
         {
             return;
         }
@@ -136,10 +138,10 @@ while (true)
         if (21 < player.Score)
         {
             Console.WriteLine("딜러의 승리");
-            blackjack.CurrentCoin -= blackjack.InputCoin;
-            Console.WriteLine($"딜러의 승리!(-{blackjack.InputCoin})");
-            Console.WriteLine($"보유칩:({blackjack.CurrentCoin})");
-            if (blackjack.CurrentCoin <= 0)//현재 가지고 있는 코인이 0이하일 경우 게임오버
+            player.CurrentCoin -= player.InputCoin;
+            Console.WriteLine($"딜러의 승리!(-{player.InputCoin})");
+            Console.WriteLine($"보유칩:({player.CurrentCoin})");
+            if (player.CurrentCoin <= 0)//현재 가지고 있는 코인이 0이하일 경우 게임오버
             {
                 Console.WriteLine($"보유한 코인이 없습니다");
                 Console.WriteLine($"게임오버");
@@ -148,17 +150,17 @@ while (true)
         else if (21 < dealer.Score)
         {
             Console.WriteLine("플레이어의 승리");
-            blackjack.CurrentCoin += blackjack.InputCoin;
-            Console.WriteLine($"플레이어의 승리!(+{blackjack.InputCoin})");
-            Console.WriteLine($"보유칩:({blackjack.CurrentCoin})");
+            player.CurrentCoin += player.InputCoin;
+            Console.WriteLine($"플레이어의 승리!(+{player.InputCoin})");
+            Console.WriteLine($"보유칩:({player.CurrentCoin})");
         }
         else if (player.Score < dealer.Score)
         {
             Console.WriteLine("딜러의 승리");
-            blackjack.CurrentCoin -= blackjack.InputCoin;
-            Console.WriteLine($"딜러의 승리!(-{blackjack.InputCoin})");
-            Console.WriteLine($"보유칩:({blackjack.CurrentCoin})");
-            if (blackjack.CurrentCoin <= 0)
+            player.CurrentCoin -= player.InputCoin;
+            Console.WriteLine($"딜러의 승리!(-{player.InputCoin})");
+            Console.WriteLine($"보유칩:({player.CurrentCoin})");
+            if (player.CurrentCoin <= 0)
             {
                 Console.WriteLine($"보유한 코인이 없습니다");
                 Console.WriteLine($"게임오버");
@@ -167,9 +169,9 @@ while (true)
         else if (player.Score > dealer.Score)
         {
             Console.WriteLine("플레이어의 승리");
-            blackjack.CurrentCoin += blackjack.InputCoin;
-            Console.WriteLine($"플레이어의 승리!(+{blackjack.InputCoin})");
-            Console.WriteLine($"보유칩:({blackjack.CurrentCoin})");
+            player.CurrentCoin += player.InputCoin;
+            Console.WriteLine($"플레이어의 승리!(+{player.InputCoin})");
+            Console.WriteLine($"보유칩:({player.CurrentCoin})");
         }
         else
         {
